@@ -35,7 +35,7 @@ if (is_array($item['PROPERTIES']['NDS']['VALUE']))
 
     </a>
 
-    <span class="prod-status 242423">
+    <span class="prod-status ">
 		<? if (!empty($item['LABEL_ARRAY_VALUE'])) {
             unset($item['LABEL_ARRAY_VALUE']['SALE']);
             unset($item['LABEL_ARRAY_VALUE']['SPECIALOFFER']);

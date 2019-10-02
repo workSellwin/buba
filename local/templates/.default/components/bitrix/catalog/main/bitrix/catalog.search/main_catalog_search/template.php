@@ -17,10 +17,13 @@ $this->setFrameMode(true);
 global $filtS, $sf2;
 ?>
 <div class="container">
-
 <?
+$componentName = "bitrix:search.page";
+if( $USER->IsAdmin() ){
+    $componentName = "bh:search.page";
+}
 $arElements = $APPLICATION->IncludeComponent(
-	"bitrix:search.page",
+    $componentName,
 	"main_new",
 	Array(
 		"RESTART" => $arParams["RESTART"],
@@ -42,6 +45,7 @@ $arElements = $APPLICATION->IncludeComponent(
 		"PAGE_RESULT_COUNT" => "500",
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => "N",
+        "REGEXP_FOR_EXCEPTION" => $arParams['SEARCH_REGEXP_FOR_EXCEPTION'],
 	),
 	$component,
 	array('HIDE_ICONS' => 'N')

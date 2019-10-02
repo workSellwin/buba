@@ -23,7 +23,8 @@
 	);?>
 <?else:?>
 	
-<?endif;*/?>
+<?endif;*/
+?>
 	<button type="submit" class="btn"><?=GetMessage("SEARCH_GO")?></button>
 	<div class="field-search-wrp"><input type="text" name="q" class="field" value="<?=$arResult["REQUEST"]["QUERY"]?>" size="40" /></div>
 	<input type="hidden" name="how" value="<?echo $arResult["REQUEST"]["HOW"]=="d"? "d": "r"?>" />

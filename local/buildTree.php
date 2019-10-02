@@ -7,8 +7,8 @@ namespace Asdrubael\Utils;
 class BuildTree
 {
 
-    const PARENT_ID = 'PARENT_ID';
-    const ID = "ID";
+    const PARENT_ID = 'Родитель';
+    const ID = "UID";
     const CHILDREN = 'CHILDREN';
 
     private $tree = [];
@@ -31,7 +31,7 @@ class BuildTree
                 unset($outputArr[$key]);
             }
         }
-        echo '<pre>' . print_r($tempArr, true) . '</pre>';
+        //echo '<pre>' . print_r($outputArr, true) . '</pre>';
         $this->outputArr = array_merge($outputArr, $tempArr);
     }
 
@@ -40,7 +40,8 @@ class BuildTree
         $length = count($this->outputArr);
 
         foreach( $this->outputArr as $key => $item ){
-            if( $item[self::PARENT_ID] === false )
+
+            if( $item[self::PARENT_ID] === "" )
             {
                 $this->tree[$item[self::ID]] = $item;
                 $this->tree[$item[self::ID]][self::CHILDREN] = [];
@@ -49,19 +50,19 @@ class BuildTree
             }
             elseif( is_array($item[self::PARENT_ID]) && count($item[self::PARENT_ID]) )
             {
-
             }
-            elseif( intval($item[self::PARENT_ID]) > 0 )
+            elseif( strlen($item[self::PARENT_ID]) > 0 )
             {
                 if( $this->putChild($item, $this->tree) )
                     unset($this->outputArr[$key]);
             }
         }
-        //echo '<pre>' . print_r($this->outputArr, true) . '</pre>';
+
         if( $length > count($this->outputArr) )
         {
             $this->createTree();
         }
+        //echo '<pre>' . print_r($this->outputArr, true) . '</pre>';
     }
 
     public function putChild($outputItem, &$treeArr)
@@ -70,15 +71,13 @@ class BuildTree
 
         foreach( $treeArr as &$item ){
 
-            if( $item['ID'] == $needId && !$this->checkExist($outputItem[self::ID], $item[self::CHILDREN]) )
+            if( $item[self::ID] == $needId && !$this->checkExist($outputItem[self::ID], $item[self::CHILDREN]) )
             {
-
                 $item[self::CHILDREN][] = array_merge($outputItem, [self::CHILDREN => []]);
                 return true;
             }
             elseif( is_array( $item[self::CHILDREN] ) && count( $item[self::CHILDREN] ) )
             {
-
                 $this->putChild( $outputItem, $item[self::CHILDREN]);
             }
         }

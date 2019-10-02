@@ -1,7 +1,7 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
 use \Bitrix\Main\Localization\Loc;
-//
+// off redirect
 //if (!\Kosmos\Multisite::showCatalogSection(Array("VARIABLES" => Array("SECTION_ID" => $arResult["IBLOCK_SECTION_ID"])))) {
 //    @define(ERROR_404, "Y");
 //    global $APPLICATION;
@@ -1562,6 +1562,11 @@ $section_id = $arResult["IBLOCK_SECTION_ID"];
                 ?>
             </div>
         </div>
+
+
+        <? /***/ ?>
+
+
     </div>
 <?
 
@@ -1707,7 +1712,6 @@ if ($haveOffers) {
         'OFFER_SELECTED' => $arResult['OFFERS_SELECTED'],
         'TREE_PROPS' => $skuProps
     );
-
 } else {
     $emptyProductProperties = empty($arResult['PRODUCT_PROPERTIES']);
     if ($arParams['ADD_PROPERTIES_TO_BASKET'] === 'Y' && !$emptyProductProperties) {
@@ -1776,6 +1780,7 @@ if ($haveOffers) {
             }
             ?>
         </div>
+
         <?
     }
 
@@ -1850,6 +1855,8 @@ if ($arParams['DISPLAY_COMPARE']) {
     );
 }
 $jsParams['NDS'] = $arResult['PROPERTIES']['NDS']['VALUE'];
+
+
 ?>
     <script>
         BX.message({
@@ -1876,6 +1883,8 @@ $jsParams['NDS'] = $arResult['PROPERTIES']['NDS']['VALUE'];
         var <?=$obName?> =
         new JCCatalogElement(<?=CUtil::PhpToJSObject($jsParams, false, true)?>);
     </script>
+
+
     <script>
         $(function () {
             $('a[href="#description2"]').click(function () {

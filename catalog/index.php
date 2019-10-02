@@ -391,7 +391,8 @@ if (isset($_REQUEST['data_num_page']) && !empty($_REQUEST['data_num_page'])) {
 			"element" => "#SECTION_CODE_PATH#/#ELEMENT_CODE#/",
 			"compare" => "compare/",
 			"smart_filter" => "#SECTION_CODE_PATH#/filter/#SMART_FILTER_PATH#/apply/",
-		)
+		),
+		"SEARCH_REGEXP_FOR_EXCEPTION" => ["#ГЕЛ([\S]+) ДЛЯ ДУШ([\S]+)#i"],
 	),
 	false
 ); ?>

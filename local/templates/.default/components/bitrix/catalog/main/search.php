@@ -145,7 +145,8 @@ $APPLICATION->IncludeComponent(
 		'ADD_TO_BASKET_ACTION' => $basketAction,
 		'SHOW_CLOSE_POPUP' => isset($arParams['COMMON_SHOW_CLOSE_POPUP']) ? $arParams['COMMON_SHOW_CLOSE_POPUP'] : '',
 		'COMPARE_PATH' => $arResult['FOLDER'].$arResult['URL_TEMPLATES']['compare'],
-		'COMPARE_NAME' => $arParams['COMPARE_NAME']
+		'COMPARE_NAME' => $arParams['COMPARE_NAME'],
+		"SEARCH_REGEXP_FOR_EXCEPTION" => $arParams["SEARCH_REGEXP_FOR_EXCEPTION"],
 	),
 	$component,
 	array("HIDE_ICONS" => "N")

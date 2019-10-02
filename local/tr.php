@@ -1,48 +1,37 @@
 <?php
 use \Asdrubael\Utils;
+
+require 'vendor/autoload.php';
 include "buildTree.php";
 
-$outArr = [
-    [
-        'ID' => 2,
-        'PARENT_ID' => 1,
-    ],
-    [
-        'ID' => 3,
-        'PARENT_ID' => 1,
-    ],
-    [
-        'ID' => 1,
-        'PARENT_ID' => false,
-    ],
-    [
-        'ID' => 4,
-        'PARENT_ID' => 3,
-    ],
-    [
-        'ID' => 5,
-        'PARENT_ID' => 2,
-    ],
-    [
-        'ID' => 6,
-        'PARENT_ID' => false,
-    ],
-    [
-        'ID' => 7,
-        'PARENT_ID' => 4,
-    ],
-    [
-        'ID' => 8,
-        'PARENT_ID' => 7,
-    ],
-    [
-        'ID' => 9,
-        'PARENT_ID' => [6, 8],
-    ],
+$points = [
+    "sections" => 'http://kocmo1c.sellwin.by/Kosmo_Sergey/hs/Kocmo/GetFolder/GoodsOnlyGroup',
 ];
 
-$buildTree = new Utils\BuildTree($outArr);
-$result = $buildTree->createTree();
+if( $_GET['mode'] == "get_sections" || !isset($_GET['mode']) ) {
+    $uri = 'http://kocmo1c.sellwin.by/Kosmo_Sergey/hs/Kocmo/GetFolder/GoodsOnlyGroup';
+}
 
-echo '<pre>' . print_r($buildTree->getTree(), true) . '</pre>';
+if( empty($uri) ){
+    echo "URL not defined";
+    die();
+}
+$client = new \GuzzleHttp\Client();
+$response = $client->request('GET', $uri);
+
+if($response->getStatusCode() == 200){
+    $outArr = json_decode($response->getBody(), true);
+}
+else{
+    echo "error: status: " . $response->getStatusCode();
+    die();
+}
+
+if( $_GET['mode'] == "get_sections" || !isset($_GET['mode']) ) {
+    $buildTree = new Utils\BuildTree($outArr);
+    $result = $buildTree->createTree();
+    echo '<pre>' . print_r($buildTree->getTree(), true) . '</pre>';
+}
+
+
 
