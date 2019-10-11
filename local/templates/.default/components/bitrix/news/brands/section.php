@@ -363,3 +363,25 @@ $APPLICATION->SetPageProperty("title", $IPROPERTY["SECTION_META_TITLE"]);
 $APPLICATION->SetPageProperty("keywords", $IPROPERTY["SECTION_META_KEYWORDS"]);
 $APPLICATION->SetPageProperty("description", $IPROPERTY["SECTION_META_DESCRIPTION"]);
 ?>
+<?php
+if($arResult["VARIABLES"]["SECTION_CODE"] == 'professionnel' && false) {
+?>
+    <a style="display:none;" class="" data-fancybox="" data-type="iframe" data-src="https://lorealprofessionnel.ru/diagnostic-bh" href="javascript:void(0);">
+    </a>
+    <script>
+        let sectionCode = '<?php echo $arResult["VARIABLES"]["SECTION_CODE"]?>';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if(sectionCode == 'professionnel'){
+                setTimeout(function () {
+                    let elem = document.querySelector('[data-src="https://lorealprofessionnel.ru/diagnostic-bh"]');
+                    elem.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+                }, 2000);
+
+            }
+        });
+
+    </script>
+<?php
+}
+?>

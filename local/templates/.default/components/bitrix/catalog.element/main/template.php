@@ -1882,6 +1882,7 @@ $jsParams['NDS'] = $arResult['PROPERTIES']['NDS']['VALUE'];
 
         var <?=$obName?> =
         new JCCatalogElement(<?=CUtil::PhpToJSObject($jsParams, false, true)?>);
+        window.withoutFaceValue = <?=$obName?>;//for certificate
     </script>
 
 
@@ -1941,4 +1942,16 @@ $jsParams['NDS'] = $arResult['PROPERTIES']['NDS']['VALUE'];
         });
     </script>
 <?
+if (!empty(current($arResult['SKU_PROPS'])['VALUES'][CATALOG_CUSTOM_CERT_ENUM])) {
+
+    foreach($arResult['OFFERS'] as $offer){
+        if( current($offer['TREE']) == CATALOG_CUSTOM_CERT_ENUM ){
+            $a['NAME'] = $offer["NAME"];
+            $a['SRC'] = $offer["DETAIL_PICTURE"]["SRC"];
+            break;
+        }
+    }
+
+    include $_SERVER['DOCUMENT_ROOT'] . "/local/include/non_cert_element.php";
+}
 unset($actualItem, $itemIds, $jsParams);

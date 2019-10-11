@@ -2806,6 +2806,8 @@
 
             this.initBasketUrl();
             this.fillBasketProps();
+            this.setCertificateSum();//metka
+
             BX.ajax({
                 method: 'POST',
                 dataType: 'json',
@@ -2813,6 +2815,16 @@
                 data: this.basketParams,
                 onsuccess: BX.proxy(this.basketResult, this)
             });
+        },
+
+        setCertificateSum: function(){//new, for without face value certificate
+
+            let certSumm = document.getElementById('cert_summ');
+            console.log('setCertificateSum');
+            if( certSumm && certSumm.value){
+
+                this.basketParams.cert_summ = certSumm.value;
+            }
         },
 
         add2Basket: function () {

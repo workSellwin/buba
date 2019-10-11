@@ -287,6 +287,15 @@ if (isset($arResult['ITEM']))
 		?>
 		<script>
 			var <?=$obName?> = new JCCatalogItem(<?=CUtil::PhpToJSObject($jsParams, false, true)?>);
+
+            <?
+            $skuArr = current( $item['SKU_TREE_VALUES'] );
+            //pr($item['SKU_TREE_VALUES']);
+
+            if ( isset($skuArr[CATALOG_CUSTOM_CERT_ENUM]) ) {?>
+                window.withoutFaceValue = <?=$obName?>;
+            <?}
+            ?>
 		</script>
 	</div>
 	<?

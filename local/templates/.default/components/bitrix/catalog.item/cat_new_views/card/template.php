@@ -21,7 +21,6 @@ use \Bitrix\Main\Localization\Loc;
  * @var CatalogSectionComponent $component
  */
 $showSubscribe = true;
-
 ?>
 
 
@@ -387,11 +386,11 @@ if (is_array($item['PROPERTIES']['NDS']['VALUE']))
                                     </div>
                                     <!-- \local\templates\.default\components\bitrix\catalog.item\cat_new_views\card\template.php -->
                                     <!-- new -->
-                                    <?php
-                                    if( !empty($skuProperty['VALUES'][CATALOG_CUSTOM_CERT_ENUM]) ){
-                                        include  $_SERVER['DOCUMENT_ROOT'] . "/local/include/non_cert.php";
-                                    }
-                                    ?>
+<!--                                    --><?php
+//                                    if( !empty($skuProperty['VALUES'][CATALOG_CUSTOM_CERT_ENUM]) ){
+//                                        include  $_SERVER['DOCUMENT_ROOT'] . "/local/include/non_cert_section.php";
+//                                    }
+//                                    ?>
                                     <!-- end -->
                                 </div>
                             </div>
@@ -793,5 +792,13 @@ if (is_array($item['PROPERTIES']['NDS']['VALUE']))
         ?>
     </div>
     </div>
+    <?
+    $skuArr = current( $item['SKU_TREE_VALUES'] );
+
+    if ( isset($skuArr[CATALOG_CUSTOM_CERT_ENUM]) ) {
+        $a = current($arParams['SKU_PROPS'])['VALUES'][CATALOG_CUSTOM_CERT_ENUM];
+        include $_SERVER['DOCUMENT_ROOT'] . "/local/include/non_cert_section.php";
+    }
+    ?>
 </div>
 

@@ -983,7 +983,6 @@
 			if (this.errorCode === 0)
 			{
 				this.canBuy = newOffer.CAN_BUY;
-
 				this.currentPriceMode = newOffer.ITEM_PRICE_MODE;
 				this.currentPrices = newOffer.ITEM_PRICES;
 				this.currentPriceSelected = newOffer.ITEM_PRICE_SELECTED;

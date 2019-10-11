@@ -11,6 +11,9 @@ $points = [
 if( $_GET['mode'] == "get_sections" || !isset($_GET['mode']) ) {
     $uri = 'http://kocmo1c.sellwin.by/Kosmo_Sergey/hs/Kocmo/GetFolder/GoodsOnlyGroup';
 }
+elseif( $_GET['mode'] == "get_goods" ){
+    $uri = 'http://kocmo1c.sellwin.by/Kosmo_Sergey/hs/Kocmo/GetFolder/GoodsItems';
+}
 
 if( empty($uri) ){
     echo "URL not defined";
@@ -31,6 +34,10 @@ if( $_GET['mode'] == "get_sections" || !isset($_GET['mode']) ) {
     $buildTree = new Utils\BuildTree($outArr);
     $result = $buildTree->createTree();
     echo '<pre>' . print_r($buildTree->getTree(), true) . '</pre>';
+}
+elseif( $_GET['mode'] == "get_goods" )
+{
+    echo$response->getBody();
 }
 
 

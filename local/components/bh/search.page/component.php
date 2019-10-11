@@ -344,20 +344,23 @@ if($this->InitComponentTemplate($templatePage))
 			}
 
 			$arReturn = array();
-			pr($ar);
+
+			$preg_template = null;
+
+			if( isset($arParams['REGEXP_FOR_EXCEPTION'][ mb_strtolower($arResult["REQUEST"]["~QUERY"]) ]) ){
+				$preg_template = $arParams['REGEXP_FOR_EXCEPTION'][ mb_strtolower($arResult["REQUEST"]["~QUERY"]) ];
+			}
+
 			while($ar)
 			{
-				if( is_array($arParams['REGEXP_FOR_EXCEPTION']) && count($arParams['REGEXP_FOR_EXCEPTION']) )
+				//pr($ar['BODY_FORMATED']);
+				if( $preg_template && isset($ar['BODY_FORMATED']) )
 				{
-					foreach($arParams['REGEXP_FOR_EXCEPTION'] as $preg_template)
-					{
-						//$preg_template = "#ГЕЛ([\S]+) ДЛЯ ДУШ([\S]+)#i";
-						preg_match($preg_template, $ar['SEARCHABLE_CONTENT'], $matches);
+					preg_match($preg_template, strip_tags($ar['BODY_FORMATED']), $matches);
 
-						if( !count($matches) ){
-							$ar = $obSearch->GetNext();
-							continue 2;
-						}
+					if( !count($matches) ){
+						$ar = $obSearch->GetNext();
+						continue;
 					}
 				}
 
